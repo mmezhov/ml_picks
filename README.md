@@ -31,17 +31,23 @@ for col in ['card4', 'card6', 'ProductCD']:
 ```
 ![Output][enc_exp_1]
 
-## Order encoding
-Encoding by numbers
+## Ordinal encoding
+The features are converted to ordinal integers. [Source](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html)  
 
+variant 1  
 ```python
 df['id_38'] = df['id_38'].map({'T':1, 'F':0})
+```
+
+variant 2  
+```python
+
 ```
 
 # NaNs treating
 
 Calculate percentage of missing values by dataframe columns:
-> to EDA library:  
+> to EDA module:  
 ```python
 def get_percentage_of_NaNs(df):
     """
@@ -56,3 +62,27 @@ def get_percentage_of_NaNs(df):
     missings = missings.reset_index().drop('index', axis=1)
     return missings
 ```
+
+Visualise features on bar plot, where axis Y - is a fraction of missings values:  
+```python
+(train_data.isnull().sum()/len(train_data)).plot(kind='bar', figsize=(15,7))
+```
+
+# Filtering and fetching data
+
+Fetching categorical feature with `str` and regular expression:
+```python
+>>> s = pd.Series(["1+1=2"])
+>>> s
+0    1+1=2
+dtype: object
+>>> s.str.split(r"\+|=", expand=True)
+     0    1    2
+0    1    1    2
+```
+[original from documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.split.html)
+
+
+# CatBoost tips
+
+[Мастер класс Решение задач классификации при помощи CatBoost – Никита Дмитриев](https://github.com/catboost/catboost/blob/master/catboost/tutorials/events/pydata_moscow_oct_13_2018.ipynb)
