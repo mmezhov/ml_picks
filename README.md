@@ -9,8 +9,12 @@ Picks about code, algorithms, pipelines etc.
 - [Features encoding](#Features-encoding)  
     - [Frequency encoding](#Frequency-encoding)  
     - [Order encoding](#Order-encoding)  
+    - [Combinations](#Combinations)  
 - [NaNs treating](#NaNs-treating)
-
+- [Filtering and fetching data](#Filtering-and-fetching-data)
+- [CatBoost tips](#CatBoost-tips)
+- [Date-time picks](#Date-time-picks)
+- [Correlation](#Correlation)
 ___
 
 # Features encoding
@@ -78,6 +82,12 @@ Visualise features on bar plot, where axis Y - is a fraction of missings values:
 (train_data.isnull().sum()/len(train_data)).plot(kind='bar', figsize=(15,7))
 ```
 
+Replace NaNs by stub, e.g. ':0' and next downgrade type of data to reduce memory usage:  
+```python
+df['id_34'] = df['id_34'].fillna(':0')
+df['id_34'] = df['id_34'].apply(lambda x: x.split(':')[1]).astype(np.int8)
+```
+
 # Filtering and fetching data
 
 Fetching categorical feature with `str` and regular expression:
@@ -105,7 +115,7 @@ model = CatBoostClassifier(
     train_dir='my_baseline_model'
 )
 ```  
-2 step v1 - import and use catboost build in visualizer (`!works not in all cases`):  
+2 step v1 - import and use catboost build in visualizer (`!doesn't work in all cases`):  
 ```python
 from catboost import MetricVisualizer
 
