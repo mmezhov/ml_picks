@@ -1,5 +1,6 @@
 [enc_exp_1]: img/enc_exp_1.png
 [MetricVisualizerPlot]: img/MetricVisualizerPlot.png
+[sns.heatmap-visualize-nans]: img/sns.heatmap-visualize-nans.png
 
 # Useful picks for machine learning engeneer
 
@@ -88,6 +89,11 @@ df['id_34'] = df['id_34'].fillna(':0')
 df['id_34'] = df['id_34'].apply(lambda x: x.split(':')[1]).astype(np.int8)
 ```
 
+Visualisation NaNs in data: black color - data is exist, else - NaNs:  
+![example][sns.heatmap-visualize-nans]  
+By $Y$ axis visualising each row in data, by $X$ axis - feature names.
+
+
 # Filtering and fetching data
 
 Fetching categorical feature with `str` and regular expression:
@@ -143,6 +149,15 @@ b) jupyter notebook
 
 
 # Date-time picks
+
+Manipulation with datetime `.dt`  
+```python
+train['TransactionDT'].dt.floor('d')…
+train_transaction['Trans_hour'] = pd.to_datetime(train_transaction['TransactionDT'],unit='s').dt.hour
+train_transaction['Trans_weekday'] = pd.to_datetime(train_transaction['TransactionDT'],unit='s').dt.weekday
+```
+[about floor()](#https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.floor.html?highlight=dt%20floor#pandas.Series.dt.floor)
+
 
 ```python
 # day of week
