@@ -1,4 +1,5 @@
 [enc_exp_1]: img/enc_exp_1.png
+[MetricVisualizerPlot]: img/MetricVisualizerPlot.png
 
 # Useful picks for machine learning engeneer
 
@@ -44,6 +45,15 @@ variant 2
 
 ```
 
+## Combinations
+itertools.combinations(iterable, [r]),  
+[source](https://docs.python.org/3/library/itertools.html#itertools.combinations)  
+```python
+>>> itertools.combinations('ABCD', 2)
+AB AC AD BC BD CD
+```
+> 
+
 # NaNs treating
 
 Calculate percentage of missing values by dataframe columns:
@@ -85,4 +95,56 @@ dtype: object
 
 # CatBoost tips
 
-[Мастер класс Решение задач классификации при помощи CatBoost – Никита Дмитриев](https://github.com/catboost/catboost/blob/master/catboost/tutorials/events/pydata_moscow_oct_13_2018.ipynb)
+[Masterclass about solving classification problem with catboost / Мастер класс Решение задач классификации при помощи CatBoost – Никита Дмитриев](https://github.com/catboost/catboost/blob/master/catboost/tutorials/events/pydata_moscow_oct_13_2018.ipynb)
+
+
+Visualize training process with plots of metrics:  
+1 step - using `train_dir` param, ex. `my_baseline_model` in constructor of model:  
+```python
+model = CatBoostClassifier(
+    train_dir='my_baseline_model'
+)
+```  
+2 step v1 - import and use catboost build in visualizer (`!works not in all cases`):  
+```python
+from catboost import MetricVisualizer
+
+MetricVisualizer(['my_baseline_model']).start()
+```  
+![MetricVisualizer plot][MetricVisualizerPlot]  
+Probably will need to run following command before running Juypter Notebook
+```
+jupyter nbextension enable --py widgetsnbextention
+```
+
+2 step v2 - using tensorboard ([more information](https://www.tensorflow.org/tensorboard/tensorboard_in_notebooks)):  
+a) terminal  
+```
+>>> tensorboard --logdir=<train_dir>
+```
+b) jupyter notebook  
+[example](https://github.com/tensorflow/tensorboard/blob/master/docs/get_started.ipynb)  
+```python
+# Load the TensorBoard notebook extension
+%load_ext tensorboard
+
+%tensorboard --logdir <train_dir>
+```
+
+
+# Date-time picks
+
+```python
+# day of week
+df['dow'] = df['created'].apply(lambda x: x.date().weekday())
+df['is_weekend'] = df['created'].apply(lambda x: 1 if x.date().weekday() in (5, 6) else 0)
+```
+
+# Correlation
+
+Cross-correlation of two 1-dimensional sequences:  
+[source](https://numpy.org/doc/stable/reference/generated/numpy.correlate.html)
+```python
+>>> np.correlate([1, 2, 3], [0, 1, 0.5], "full")
+array([0.5,  2. ,  3.5,  3. ,  0. ])
+```
