@@ -28,13 +28,13 @@ Picks about code, algorithms, pipelines etc.
 ___
 
 # Regression
-[[TOP 10%] House Price Regression Competition NB](https://www.kaggle.com/gcdatkin/top-10-house-price-regression-competition-nb)  
-What to pay attention to:
-- model selection with pycaret library for automation building baseline of different models and their comparison,
-- how to use optuna library to find better hyperparameters,
-- how to ensambling diffeternt models with coefficients,
-- log transformation for skewed features and target,
-- cosine transformation for cyclical features,
+- [[TOP 10%] House Price Regression Competition NB](https://www.kaggle.com/gcdatkin/top-10-house-price-regression-competition-nb)  
+    What to pay attention to:
+    - model selection with `pycaret` library for automation building baseline of different models and their comparison,
+    - how to use `optuna` library to find better hyperparameters,
+    - how to ensambling diffeternt models with coefficients,
+    - log transformation for skewed features and target,
+    - cosine transformation for cyclical features.
 
 # Features encoding
 ## Frequency encoding
