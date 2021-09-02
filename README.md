@@ -7,16 +7,34 @@
 Picks about code, algorithms, pipelines etc.
 
 # Table of content
+## Real task solution
+- [Regression](#Regression)
+- 
+## Features
 - [Features encoding](#Features-encoding)  
     - [Frequency encoding](#Frequency-encoding)  
     - [Order encoding](#Order-encoding)  
     - [Combinations](#Combinations)  
 - [NaNs treating](#NaNs-treating)
-- [Filtering and fetching data](#Filtering-and-fetching-data)
-- [CatBoost tips](#CatBoost-tips)
-- [Date-time picks](#Date-time-picks)
 - [Correlation](#Correlation)
+
+## Data manipulation
+- [Filtering and fetching data](#Filtering-and-fetching-data)
+- [Date-time picks](#Date-time-picks)
+
+## Notes about algorithms
+- [CatBoost tips](#CatBoost-tips)
+
 ___
+
+# Regression
+[[TOP 10%] House Price Regression Competition NB](https://www.kaggle.com/gcdatkin/top-10-house-price-regression-competition-nb)  
+What to pay attention to:
+- model selection with pycaret library for automation building baseline of different models and their comparison,
+- how to use optuna library to find better hyperparameters,
+- how to ensambling diffeternt models with coefficients,
+- log transformation for skewed features and target,
+- cosine transformation for cyclical features,
 
 # Features encoding
 ## Frequency encoding
@@ -35,7 +53,13 @@ for col in ['card4', 'card6', 'ProductCD']:
     test_df[col]  = test_df[col].map(col_encoded)
     print(col_encoded)
 ```
-![Output][enc_exp_1]
+![Output][enc_exp_1]  
+
+Encoding categorical features with `pd.get_dummies()`:  
+```python
+data = pd.get_dummies(data)
+```  
+note: `data` also has numerical features(!)
 
 ## Ordinal encoding
 The features are converted to ordinal integers. [Source](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html)  
