@@ -25,6 +25,9 @@ Picks about code, algorithms, pipelines etc.
 ## Notes about algorithms
 - [CatBoost tips](#CatBoost-tips)
 
+## Efficiency
+- [Make loops parallel computation](#Make-loops-parallel-computation)
+
 ___
 
 # Regression
@@ -196,4 +199,23 @@ Cross-correlation of two 1-dimensional sequences:
 ```python
 >>> np.correlate([1, 2, 3], [0, 1, 0.5], "full")
 array([0.5,  2. ,  3.5,  3. ,  0. ])
+```
+
+# Efficiency
+## Make loops parallel computation
+
+```python
+from joblib import Parallel, delayed
+
+
+def preprocess_for_value(value):
+    ...preprocessing value...
+    return result
+    
+    
+# Parallelize Preprocessing for Every value in list_of_values
+df = Parallel(n_jobs=-1, verbose=1)(delayed(preprocess_for_value)(value) for value in list_of_values)
+
+# Concatenate All Dataframes from Parallelized Preprocessing
+df = pd.concat(df, ignore_index=True)
 ```
