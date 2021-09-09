@@ -204,6 +204,8 @@ array([0.5,  2. ,  3.5,  3. ,  0. ])
 # Efficiency
 ## Make loops parallel computation
 
+[joblib documentation link](https://joblib.readthedocs.io/en/latest/parallel.html)
+
 ```python
 from joblib import Parallel, delayed
 
